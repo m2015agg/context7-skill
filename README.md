@@ -18,11 +18,37 @@ This package solves that:
 | | Context7 MCP | context7-skill |
 |---|---|---|
 | Doc lookup | API call every time | Local SQLite cache first |
-| Context cost | Full docs dumped in window | CLI returns just what's needed |
+| Speed | **~1,270ms** per lookup | **~64ms** per lookup (**20x faster**) |
+| Context cost | **~3,077 tokens** per lookup | **~1,666 tokens** per lookup (**45% less**) |
 | Repeat queries | Re-fetches same docs | Cache hit, zero API calls |
+| 20 lookups/session | 25.4s waiting, 61K tokens | 1.3s waiting, 33K tokens |
 | Offline | No | Yes, for cached libs |
 | Project-aware | No | Auto-detects deps, pre-caches |
 | Install | Manual MCP config | `install` → `init` → done |
+
+### Benchmarks (real measurements, BibleAI project — 86 libraries cached)
+
+```
+Speed:
+  MCP (API round-trip):  ~1,270ms average per lookup
+  CLI (SQLite cache):       ~64ms average per lookup
+  Speedup:                  19.8x faster
+
+Context Window:
+  MCP: ~3,077 tokens per lookup (tool schemas + API response)
+  CLI: ~1,666 tokens per lookup (bash command + result only)
+  Saved: ~1,411 tokens per lookup (45%)
+
+Per Session (20 doc lookups):
+  MCP:  25.4s waiting, ~61,540 tokens consumed
+  CLI:   1.3s waiting, ~33,320 tokens consumed
+  Saved: 24.1s and ~28,220 tokens per session
+
+Over 10 Conversations (repeat queries):
+  MCP:  615,400 tokens (re-fetches every time)
+  CLI:  333,200 tokens (cache hits after first fetch)
+  Saved: 282,200 tokens (45%), ~$0.85 at $3/M input tokens
+```
 
 ## Quick Start
 

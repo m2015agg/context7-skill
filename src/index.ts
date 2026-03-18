@@ -20,7 +20,7 @@ const program = new Command();
 program
   .name("context7-skill")
   .description("Local documentation cache for AI agents. Caches Context7 library docs in SQLite+FTS5.")
-  .version("0.1.0");
+  .version("0.1.1");
 
 program.addCommand(installCommand());
 program.addCommand(initCommand());
