@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(context7-skill search:*)",
+      "Bash(context7-skill docs:*)",
+      "Bash(context7-skill libs:*)",
+      "Bash(context7-skill add:*)",
+      "Bash(context7-skill remove:*)",
+      "Bash(context7-skill diff:*)",
+      "Bash(context7-skill cache list:*)",
+      "Bash(context7-skill cache stats:*)",
+      "Bash(context7-skill doctor:*)",
+      "Bash(context7-skill snapshot:*)",
+      "Bash(ctx7 library:*)",
+      "Bash(ctx7 docs:*)"
+    ]
+  }
+}

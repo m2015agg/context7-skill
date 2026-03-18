@@ -1,0 +1,47 @@
+{
+  "name": "@m2015agg/context7-skill",
+  "version": "0.1.0",
+  "description": "Local documentation cache for AI agents. Caches Context7 library docs in SQLite+FTS5, serving them via CLI instead of burning context on MCP round-trips.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "context7-skill": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "link": "npm run build && npm link",
+    "prepublishOnly": "npm run build",
+    "postinstall": "node -e \"process.stdout.write('\\n  context7-skill installed! Run: context7-skill install\\n\\n')\""
+  },
+  "keywords": [
+    "context7",
+    "cli",
+    "ai",
+    "claude",
+    "agent",
+    "skill",
+    "llm",
+    "documentation",
+    "cache",
+    "mcp-alternative"
+  ],
+  "author": "m2015agg <matthgreen2015@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^12.8.0",
+    "commander": "^13.1.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^25.5.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}

@@ -1,0 +1,4 @@
+node_modules/
+dist/
+.context7-cache/
+*.js.map
