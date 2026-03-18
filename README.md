@@ -208,6 +208,31 @@ The CLAUDE.md instructions tell your agent:
 - **Pre-approved commands** are read-only (search, docs, libs)
 - **Write operations** (add, remove, snapshot) still require approval
 
+## Limitations
+
+- **Context7 API dependency** — initial doc fetching requires the Context7 API. After caching, works fully offline.
+- **No semantic search** — FTS5 uses porter stemming (word-level matching). Won't find "dependency injection" when searching "DI". Embedding-based search planned for v1.0.
+- **One cache per project** — `.context7-cache/` is project-local. Cross-project sharing is via the global resolution cache only (library ID mappings, not doc snippets).
+- **API rate limits** — Context7 may throttle during large `snapshot` operations. The CLI handles retries but initial caching of 80+ libraries can take a few minutes.
+
+## Roadmap
+
+### v0.2 — Smarter Caching
+- [ ] `snapshot --diff` — only refresh libraries that have new versions
+- [ ] Cache TTL per library (popular libs refresh weekly, stable ones monthly)
+- [ ] `context7-skill suggest` — suggest docs to pre-cache based on files being edited
+
+### v0.3 — Semantic Search
+- [ ] Optional vector embeddings for cached snippets (`search --semantic`)
+- [ ] Uses OpenAI `text-embedding-3-small` (~$0.01 per snapshot)
+- [ ] Find conceptual matches ("how to handle auth" → finds middleware, JWT, session docs)
+
+### v1.0 — Multi-Agent Distribution
+- [ ] Anthropic skills marketplace integration
+- [ ] Cursor `.cursorrules` and Codex `AGENTS.md` generation
+- [ ] Shared team caches via git (`.context7-cache/` as checked-in artifact)
+- [ ] Web dashboard for cache visualization and stats
+
 ## Companion Packages
 
 - **[@m2015agg/supabase-skill](https://www.npmjs.com/package/@m2015agg/supabase-skill)** — Same pattern for Supabase database schema
